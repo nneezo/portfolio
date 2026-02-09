@@ -16,7 +16,7 @@
             
             // Configuration
             this.config = {
-                particleCount: options.particleCount || 150,
+                particleCount: options.particleCount || 250,
                 maxDistance: options.maxDistance || 150,
                 repelForce: options.repelForce || 0.3,
                 particleSize: options.particleSize || 3,
@@ -260,3 +260,4 @@
     }
 
 })();
+
