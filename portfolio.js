@@ -372,16 +372,19 @@ document.addEventListener('DOMContentLoaded', function() {
             container.style.userSelect = 'none';
             startX = e.pageX - container.offsetLeft;
             scrollLeft = container.scrollLeft;
+            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
         });
-
-        container.addEventListener('mouseleave', () => {
-            isDown = false;
-            container.style.cursor = 'grab';
-        });
-
+        
         container.addEventListener('mouseup', () => {
             isDown = false;
             container.style.cursor = 'grab';
+            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'auto');
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'auto');
         });
 
         container.addEventListener('mousemove', (e) => {
