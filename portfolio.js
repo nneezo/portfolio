@@ -1,7 +1,4 @@
-// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // TYPING EFFECT
     
     const words = ["HI! I'M DENZEN"];
     const typingSpeed = 90;
@@ -355,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // HORIZONTAL SCROLL CAROUSEL - MOUSE DRAG FUNCTIONALITY (FIXED + TOUCH SUPPORT)
+     // HORIZONTAL SCROLL CAROUSEL - MOUSE DRAG FUNCTIONALITY (FIXED + TOUCH SUPPORT)
 
     function enableDragScroll(container) {
         let isDown = false;
@@ -403,49 +400,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 hasDragged = false;
             }
         }, true);
-
-        // TOUCH SUPPORT (mobile swipe)
-        let touchStartX = 0;
-        let touchScrollLeft = 0;
-
-        container.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].pageX;
-            touchScrollLeft = container.scrollLeft;
-        }, { passive: true });
-
-        container.addEventListener('touchmove', (e) => {
-            const touchX = e.touches[0].pageX;
-            const walk = (touchStartX - touchX) * 1.5;
-            container.scrollLeft = touchScrollLeft + walk;
-        }, { passive: true });
-    }
-
-    // Apply drag scrolling to all carousel containers
-    const reelsGrid = document.querySelector('.reels-grid');
-    const estateGrid = document.querySelector('.estate-grid');
-    const designsGrid = document.querySelector('.designs-grid');
-
-    if (reelsGrid) enableDragScroll(reelsGrid);
-    if (estateGrid) enableDragScroll(estateGrid);
-    if (designsGrid) enableDragScroll(designsGrid);
-
+    
+    if (reelsGrid) preventClickAfterDrag(reelsGrid);
+    if (estateGrid) preventClickAfterDrag(estateGrid);
+    if (designsGrid) preventClickAfterDrag(designsGrid);
+    
     // CAROUSEL BUTTON CONTROLS
     const scrollLeftBtn = document.getElementById('reelsScrollLeft');
     const scrollRightBtn = document.getElementById('reelsScrollRight');
-
+    
     if (scrollLeftBtn && reelsGrid) {
         scrollLeftBtn.addEventListener('click', function() {
-            const scrollAmount = reelsGrid.offsetWidth * 0.1;
+            const scrollAmount = reelsGrid.offsetWidth * 0.01;
             reelsGrid.scrollBy({
                 left: -scrollAmount,
                 behavior: 'smooth'
             });
         });
     }
-
+    
     if (scrollRightBtn && reelsGrid) {
         scrollRightBtn.addEventListener('click', function() {
-            const scrollAmount = reelsGrid.offsetWidth * 0.1;
+            const scrollAmount = reelsGrid.offsetWidth * 0.01;
             reelsGrid.scrollBy({
                 left: scrollAmount,
                 behavior: 'smooth'
@@ -544,6 +520,12 @@ function checkBackdropFilterSupport() {
 
 checkBackdropFilterSupport();
 
+// CONSOLE EASTER EGG
+
+console.log('%c👋 Welcome to Denzen\'s Portfolio!', 'color: #fff; background: #000; font-size: 20px; padding: 10px;');
+console.log('%cVideo Editor • Graphic Designer', 'color: #666; font-size: 12px;');
+console.log('%cInterested in working together? Let\'s connect!', 'color: #333; font-size: 14px;');
+
 // BACK TO TOP LOGIC
 
 const backToTopBtn = document.getElementById("backToTop");
@@ -630,7 +612,5 @@ window.addEventListener('scroll', () => {
     });
 });
 
-window.addEventListener('load', updateNavigationColors);
-window.addEventListener('resize', updateNavigationColors);
 window.addEventListener('load', updateNavigationColors);
 window.addEventListener('resize', updateNavigationColors);
