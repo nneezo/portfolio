@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (scrollLeftBtn && reelsGrid) {
         scrollLeftBtn.addEventListener('click', function() {
-            const scrollAmount = reelsGrid.offsetWidth * 0.8;
+            const scrollAmount = reelsGrid.offsetWidth * 0.1;
             reelsGrid.scrollBy({
                 left: -scrollAmount,
                 behavior: 'smooth'
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (scrollRightBtn && reelsGrid) {
         scrollRightBtn.addEventListener('click', function() {
-            const scrollAmount = reelsGrid.offsetWidth * 0.8;
+            const scrollAmount = reelsGrid.offsetWidth * 0.1;
             reelsGrid.scrollBy({
                 left: scrollAmount,
                 behavior: 'smooth'
