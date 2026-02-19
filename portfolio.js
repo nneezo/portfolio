@@ -1,3 +1,4 @@
+// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     
     // TYPING EFFECT
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileNavOverlay.classList.toggle('active');
             if (navBlurOverlay) navBlurOverlay.classList.toggle('active');
             
+            // Prevent background scrolling when menu is open
             if (this.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -67,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Close menu when blur overlay is clicked
         if (navBlurOverlay) {
             navBlurOverlay.addEventListener('click', function() {
                 hamburger.classList.remove('active');
@@ -76,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
+        // Close menu when nav item is clicked
         mobileNavItems.forEach(item => {
             item.addEventListener('click', function() {
                 hamburger.classList.remove('active');
@@ -85,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
+        // Close menu on ESC key press
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && mobileNavOverlay.classList.contains('active')) {
                 hamburger.classList.remove('active');
@@ -350,8 +355,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // HORIZONTAL SCROLL CAROUSEL - MOUSE DRAG FUNCTIONALITY
-    
+     // HORIZONTAL SCROLL CAROUSEL - MOUSE DRAG FUNCTIONALITY 
+
     function enableDragScroll(container) {
         let isDown = false;
         let startX;
@@ -368,14 +373,14 @@ document.addEventListener('DOMContentLoaded', function() {
             startX = e.pageX - container.offsetLeft;
             scrollLeft = container.scrollLeft;
         });
-
-        container.addEventListener('mouseleave', () => {
+        
+        container.addEventListener('mouseup', () => {
             isDown = false;
             container.style.cursor = 'grab';
             container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'auto');
         });
-
-        container.addEventListener('mouseup', () => {
+        
+        container.addEventListener('mouseleave', () => {
             isDown = false;
             container.style.cursor = 'grab';
             container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'auto');
@@ -385,12 +390,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isDown) return;
             e.preventDefault();
             hasDragged = true;
-            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
+            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none'); 
             const x = e.pageX - container.offsetLeft;
             const walk = (x - startX) * 2;
             container.scrollLeft = scrollLeft - walk;
         });
-
+        // Prevent clicks on child elements after a drag
         container.addEventListener('click', (e) => {
             if (hasDragged) {
                 e.preventDefault();
@@ -415,43 +420,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: true });
     }
 
-    // Prevent click events after drag
-    function preventClickAfterDrag(container) {
-        let dragging = false;
-        
-        container.addEventListener('mousedown', () => {
-            dragging = false;
-        });
-        
-        container.addEventListener('mousemove', () => {
-            dragging = true;
-        });
-        
-        container.addEventListener('click', (e) => {
-            if (dragging) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        }, true);
-    }
-
     // Apply drag scrolling to all carousel containers
     const reelsGrid = document.querySelector('.reels-grid');
     const estateGrid = document.querySelector('.estate-grid');
     const designsGrid = document.querySelector('.designs-grid');
-    
+
     if (reelsGrid) enableDragScroll(reelsGrid);
     if (estateGrid) enableDragScroll(estateGrid);
     if (designsGrid) enableDragScroll(designsGrid);
 
-    if (reelsGrid) preventClickAfterDrag(reelsGrid);
-    if (estateGrid) preventClickAfterDrag(estateGrid);
-    if (designsGrid) preventClickAfterDrag(designsGrid);
-    
     // CAROUSEL BUTTON CONTROLS
     const scrollLeftBtn = document.getElementById('reelsScrollLeft');
     const scrollRightBtn = document.getElementById('reelsScrollRight');
-    
+
     if (scrollLeftBtn && reelsGrid) {
         scrollLeftBtn.addEventListener('click', function() {
             const scrollAmount = reelsGrid.offsetWidth * 0.8;
@@ -461,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     if (scrollRightBtn && reelsGrid) {
         scrollRightBtn.addEventListener('click', function() {
             const scrollAmount = reelsGrid.offsetWidth * 0.8;
@@ -562,12 +543,6 @@ function checkBackdropFilterSupport() {
 }
 
 checkBackdropFilterSupport();
-
-// CONSOLE EASTER EGG
-
-console.log('%c👋 Welcome to Denzen\'s Portfolio!', 'color: #fff; background: #000; font-size: 20px; padding: 10px;');
-console.log('%cVideo Editor • Graphic Designer', 'color: #666; font-size: 12px;');
-console.log('%cInterested in working together? Let\'s connect!', 'color: #333; font-size: 14px;');
 
 // BACK TO TOP LOGIC
 
