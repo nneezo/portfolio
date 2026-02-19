@@ -604,6 +604,9 @@ body {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 }
+.reels-grid .reel iframe {
+    pointer-events: none;
+}
 
 /* CARD STYLING */
 .reel {
