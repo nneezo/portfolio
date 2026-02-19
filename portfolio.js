@@ -372,7 +372,6 @@ document.addEventListener('DOMContentLoaded', function() {
             container.style.userSelect = 'none';
             startX = e.pageX - container.offsetLeft;
             scrollLeft = container.scrollLeft;
-            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
         });
         
         container.addEventListener('mouseup', () => {
@@ -391,11 +390,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isDown) return;
             e.preventDefault();
             hasDragged = true;
+            container.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none'); 
             const x = e.pageX - container.offsetLeft;
             const walk = (x - startX) * 2;
             container.scrollLeft = scrollLeft - walk;
         });
-
         // Prevent clicks on child elements after a drag
         container.addEventListener('click', (e) => {
             if (hasDragged) {
