@@ -215,7 +215,7 @@ body {
     transition-delay: 0.3s;
 }
 
-/* QUOTE TEXT - LEFT SIDE */
+/* QUOTE TEXT - LEFT SIDE 
 
 .quote-text {
     position: fixed;
@@ -234,7 +234,7 @@ body {
 
 .quote-text.on-light p {
     color: #000000;
-}
+} */
 
 /* NAVIGATION - RIGHT SIDE */
 
