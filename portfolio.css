@@ -1563,46 +1563,57 @@ img {
     }
 }
 
-.hero-cta {
+.cta {
+    padding: 4rem 2rem;
+    background: #1a1a1a;
+}
+
+.cta-card {
+    border-radius: 22px;
+    padding: 2.5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cta-card h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+    color: #fff;
+}
+
+.cta-card p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+}
+
+.cta-links {
     display: flex;
+    justify-content: center;
     gap: 1rem;
-    margin-top: 1.5rem;
     flex-wrap: wrap;
 }
 
-.cta-btn {
-    padding: 0.9rem 1.5rem;
+.cta-link {
+    text-decoration: none;
+    padding: 0.85rem 1.25rem;
     border-radius: 16px;
-    font-family: 'Space Mono', monospace;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 1.5px;
-    cursor: pointer;
-    border: 2px solid rgba(212, 167, 74, 0.25);
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    color: #fff;
+    border: 1px solid rgba(212, 167, 74, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
-.cta-btn:hover {
+.cta-link:hover {
     transform: translateY(-2px);
-    border-color: rgba(212, 167, 74, 0.5);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-    background: rgba(255, 255, 255, 0.35);
-}
-
-.cta-btn.primary {
-    color: #000;
-}
-
-.cta-btn.secondary {
-    color: #000;
-    background: rgba(255, 255, 255, 0.18);
-}
-
-@media (max-width: 768px) {
-    .hero-cta {
-        justify-content: center;
-    }
+    border-color: rgba(212, 167, 74, 0.6);
+    background: rgba(255, 255, 255, 0.10);
 }
