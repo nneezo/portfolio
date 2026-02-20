@@ -1530,6 +1530,39 @@ img {
     opacity: 0.95;
 }
 
+@media (max-width: 1024px) {
+    .reels-grid .reel,
+    .estate-grid .estate-video {
+        width: min(400px, 85vw);
+    }
+    
+    .designs-grid .design-card {
+        width: min(320px, 75vw);
+    }
+}
+
+@media (max-width: 768px) {
+    .reels-grid,
+    .estate-grid,
+    .designs-grid {
+        gap: 1rem;
+    }
+    
+    .reels-grid .reel,
+    .estate-grid .estate-video,
+    .designs-grid .design-card {
+        width: min(350px, 90vw);
+    }
+}
+
+@media (max-width: 480px) {
+    .reels-grid .reel,
+    .estate-grid .estate-video,
+    .designs-grid .design-card {
+        width: 85vw;
+    }
+}
+
 .hero-cta {
     display: flex;
     gap: 1rem;
