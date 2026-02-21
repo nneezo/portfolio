@@ -553,6 +553,32 @@ body {
     color: #d4a74a; 
 }
 
+/* Featured Showcase (centered single reel) */
+.featured-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  padding: 20px 0;
+}
+
+.featured-grid .reel {
+  width: min(920px, 92vw);
+  margin: 0 auto;
+}
+
+.featured-grid .reel iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;   
+  height: auto;
+  display: block;
+  border: 0;
+  border-radius: inherit; 
+}
+.featured-grid .reel {
+  transform: translateZ(0);
+}
+
 /* SHORT REELS SECTION - CLEAN BACKGROUND */
 
 .short-reels {
