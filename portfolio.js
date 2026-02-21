@@ -416,14 +416,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (scrollLeftBtn && reelsGrid) {
     scrollLeftBtn.addEventListener('click', function () {
-      const scrollAmount = reelsGrid.clientWidth * 0.8;
+      const scrollAmount = reelsGrid.clientWidth * 0.1;
       reelsGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     });
   }
 
   if (scrollRightBtn && reelsGrid) {
     scrollRightBtn.addEventListener('click', function () {
-      const scrollAmount = reelsGrid.clientWidth * 0.8;
+      const scrollAmount = reelsGrid.clientWidth * 0.1;
       reelsGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
   }
