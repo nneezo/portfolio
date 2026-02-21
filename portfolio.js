@@ -10,56 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  const reelsGrid = document.querySelector('#work .reels-grid');
-  const dotsContainer = document.getElementById('reelsDots');
-  
-  if (reelsGrid && dotsContainer) {
-    const items = Array.from(reelsGrid.querySelectorAll('.reel'));
-  
-    // Auto create dots
-    dotsContainer.innerHTML = items
-      .map((_, i) => `<button class="dot ${i === 0 ? 'is-active' : ''}" data-index="${i}"></button>`)
-      .join('');
-  
-    const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
-  
-    const setActiveDot = (index) => {
-      dots.forEach(dot => dot.classList.remove('is-active'));
-      if (dots[index]) dots[index].classList.add('is-active');
-    };
-  
-    // Scroll to reel when clicking dot
-    dotsContainer.addEventListener('click', (e) => {
-      const btn = e.target.closest('.dot');
-      if (!btn) return;
-      const index = Number(btn.dataset.index);
-      const target = items[index];
-      reelsGrid.scrollTo({
-        left: target.offsetLeft - 8,
-        behavior: 'smooth'
-      });
-      setActiveDot(index);
-    });
-  
-    // Update active dot on scroll
-    reelsGrid.addEventListener('scroll', () => {
-      const center = reelsGrid.scrollLeft + reelsGrid.clientWidth / 2;
-      let closestIndex = 0;
-      let minDistance = Infinity;
-  
-      items.forEach((item, i) => {
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const distance = Math.abs(center - itemCenter);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIndex = i;
-        }
-      });
-  
-      setActiveDot(closestIndex);
-    }, { passive: true });
-  }  
-
   // TYPING EFFECT
   const words = ["HI! I'M DENZEN"];
   const typingSpeed = 90;
@@ -477,76 +427,134 @@ document.addEventListener('DOMContentLoaded', function () {
       reelsGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
   }
-}); // ✅ IMPORTANT: closes DOMContentLoaded
+}); 
+document.addEventListener('DOMContentLoaded', function () {
 
-// PREVENT IMAGE DRAG
-document.addEventListener('dragstart', function (e) {
-  if (e.target && e.target.tagName === 'IMG') e.preventDefault();
-});
+  /* PREVENT IMAGE DRAG */
+  document.addEventListener('dragstart', function (e) {
+    if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+  });
 
-// BACKDROP FILTER SUPPORT CHECK
-function checkBackdropFilterSupport() {
-  const testElement = document.createElement('div');
-  testElement.style.backdropFilter = 'blur(10px)';
-  if (!testElement.style.backdropFilter) {
-    document.body.classList.add('no-backdrop-filter');
+  /* BACKDROP FILTER SUPPORT CHECK */
+  function checkBackdropFilterSupport() {
+    const testElement = document.createElement('div');
+    testElement.style.backdropFilter = 'blur(10px)';
+    if (!testElement.style.backdropFilter) {
+      document.body.classList.add('no-backdrop-filter');
+    }
   }
-}
-checkBackdropFilterSupport();
+  checkBackdropFilterSupport();
 
-// BACK TO TOP BUTTON
-const backToTopBtn = document.getElementById('backToTop');
-if (backToTopBtn) {
-  window.addEventListener(
-    'scroll',
-    () => {
+  /* BACK TO TOP BUTTON */
+  const backToTopBtn = document.getElementById('backToTop');
+
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 300) backToTopBtn.classList.add('show');
       else backToTopBtn.classList.remove('show');
-    },
-    { passive: true }
-  );
+    }, { passive: true });
 
-  backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-// NAV COLOR UPDATE
-function updateNavigationColors() {
-  const quoteText = document.querySelector('.quote-text');
-  const topNav = document.querySelector('.top-nav');
-  const hamburger = document.querySelector('.hamburger');
-
-  const lightSections = [
-    document.querySelector('.hero'),
-    document.querySelector('.short-reels'),
-    document.querySelector('.graphic-designs'),
-  ];
-
-  function checkBackground(element) {
-    if (!element) return false;
-    const rect = element.getBoundingClientRect();
-    const elementCenter = rect.top + rect.height / 2;
-
-    for (const section of lightSections) {
-      if (!section) continue;
-      const sectionRect = section.getBoundingClientRect();
-      if (elementCenter >= sectionRect.top && elementCenter <= sectionRect.bottom) return true;
-    }
-    return false;
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
-  if (quoteText) quoteText.classList.toggle('on-light', checkBackground(quoteText));
-  if (topNav) topNav.classList.toggle('on-light', checkBackground(topNav));
-  if (hamburger) hamburger.classList.toggle('on-light', checkBackground(hamburger));
-}
+  /* NAV COLOR UPDATE */
+  function updateNavigationColors() {
+    const quoteText = document.querySelector('.quote-text');
+    const topNav = document.querySelector('.top-nav');
+    const hamburger = document.querySelector('.hamburger');
 
-window.addEventListener('load', updateNavigationColors);
-window.addEventListener('resize', updateNavigationColors);
-window.addEventListener(
-  'scroll',
-  () => {
+    const lightSections = [
+      document.querySelector('.hero'),
+      document.querySelector('.short-reels'),
+      document.querySelector('.graphic-designs'),
+    ];
+
+    function checkBackground(element) {
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      const elementCenter = rect.top + rect.height / 2;
+
+      for (const section of lightSections) {
+        if (!section) continue;
+        const sectionRect = section.getBoundingClientRect();
+        if (elementCenter >= sectionRect.top && elementCenter <= sectionRect.bottom) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    if (quoteText) quoteText.classList.toggle('on-light', checkBackground(quoteText));
+    if (topNav) topNav.classList.toggle('on-light', checkBackground(topNav));
+    if (hamburger) hamburger.classList.toggle('on-light', checkBackground(hamburger));
+  }
+
+  window.addEventListener('load', updateNavigationColors);
+  window.addEventListener('resize', updateNavigationColors);
+  window.addEventListener('scroll', () => {
     window.requestAnimationFrame(updateNavigationColors);
-  },
-  { passive: true }
-);
+  }, { passive: true });
+
+  /* WORK CAROUSEL DOTS */
+  const reelsGrid = document.querySelector('#work .reels-grid');
+  const dotsContainer = document.getElementById('reelsDots');
+
+  if (reelsGrid && dotsContainer) {
+
+    const items = Array.from(reelsGrid.querySelectorAll('.reel'));
+
+    // Auto create dots
+    dotsContainer.innerHTML = items
+      .map((_, i) =>
+        `<button class="dot ${i === 0 ? 'is-active' : ''}" data-index="${i}"></button>`
+      )
+      .join('');
+
+    const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
+
+    function setActiveDot(index) {
+      dots.forEach(dot => dot.classList.remove('is-active'));
+      if (dots[index]) dots[index].classList.add('is-active');
+    }
+
+    // Click dot → scroll
+    dotsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.dot');
+      if (!btn) return;
+
+      const index = Number(btn.dataset.index);
+      const target = items[index];
+
+      reelsGrid.scrollTo({
+        left: target.offsetLeft - 8,
+        behavior: 'smooth'
+      });
+
+      setActiveDot(index);
+    });
+
+    // Update active dot while scrolling
+    reelsGrid.addEventListener('scroll', () => {
+      const center = reelsGrid.scrollLeft + reelsGrid.clientWidth / 2;
+
+      let closestIndex = 0;
+      let minDistance = Infinity;
+
+      items.forEach((item, i) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(center - itemCenter);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = i;
+        }
+      });
+
+      setActiveDot(closestIndex);
+
+    }, { passive: true });
+  }
+
+});
