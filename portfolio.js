@@ -675,5 +675,13 @@ window.addEventListener('scroll', () => {
 
 });
 
+const seeMoreBtn = document.getElementById('seeMoreBtn');
+if (seeMoreBtn) {
+  seeMoreBtn.addEventListener('click', () => {
+    const work = document.getElementById('work');
+    if (work) work.scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
 window.addEventListener('load', updateNavigationColors);
 window.addEventListener('resize', updateNavigationColors);
