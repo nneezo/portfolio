@@ -553,8 +553,7 @@ body {
     color: #d4a74a; 
 }
 
-/* Featured Showcase  */
-
+/* Featured Showcase */
 #impress {
   padding-bottom: 60px;
   text-align: center;
@@ -599,20 +598,14 @@ body {
 }
 
 @media (max-width: 768px) {
-    .carousel-controls {
-        display: flex;
-    }
-}
+  #impress .reel {
+    width: 95vw;
+  }
 
-#impress h2 {
+  #impress h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
   }
-}
-
-#work .carousel-controls {
-  position: relative;
-  z-index: 999;
 }
 
 .section-divider {
