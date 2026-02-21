@@ -122,27 +122,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // PARALLAX EFFECT FOR HERO SECTION
-    
     const hero = document.querySelector('.hero');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileWidth = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
     
     let ticking = false;
     
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(function() {
-                const scrolled = window.pageYOffset;
-                
-                if (hero) {
-                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    hero.style.opacity = 1 - scrolled / 600;
-                }
-                
-                ticking = false;
-            });
-            
-            ticking = true;
-        }
-    });
+    window.addEventListener('scroll', function () {
+      if (prefersReducedMotion || isMobileWidth) return; 
+        
+        window.requestAnimationFrame(function () {
+          const scrolled = window.pageYOffset;
+    
+          if (hero) {
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            hero.style.opacity = 1 - scrolled / 600;
+          }
+    
+          ticking = false;
+        });
+    
+        ticking = true;
+      }
+    }, { passive: true });
     
     // INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS
     
