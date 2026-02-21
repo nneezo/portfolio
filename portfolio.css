@@ -553,10 +553,17 @@ body {
     color: #d4a74a; 
 }
 
-/* Featured Showcase - Landscape */
+/* Featured Showcase  */
 
 #impress {
+  padding-bottom: 60px;
   text-align: center;
+}
+
+#impress .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #impress h2 {
@@ -569,23 +576,38 @@ body {
 #impress .reels-grid {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 #impress .reel {
-  width: min(1000px, 92vw);   
-  height: auto !important;   
+  width: min(900px, 95vw);
   aspect-ratio: 16 / 9;
+  height: auto !important;
 }
 
 #impress .reel iframe {
   width: 100%;
   height: 100%;
-  display: block;
   border: 0;
+  display: block;
   border-radius: inherit;
 }
 
+#impress .carousel-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  #impress .reel {
+    width: 95vw;
+  }
+
+  #impress h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+}
 /* SHORT REELS SECTION - CLEAN BACKGROUND */
 
 .short-reels {
