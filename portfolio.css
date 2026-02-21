@@ -553,37 +553,37 @@ body {
     color: #d4a74a; 
 }
 
-/* Featured Showcase */
-.featured-grid {
+/* Featured Showcase - Landscape */
+
+#impress {
+  text-align: center;
+}
+
+#impress h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  color: white;
+}
+
+#impress .reels-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0;
-  padding: 20px 0;
-}
-.featured-grid h2 {
- font-size: 3rem;
- font-weight: 900;
- margin-bottom: 3rem;
- color: white;
- text-align: center;
 }
 
-.featured-grid .reel {
-  width: min(920px, 92vw);
-  margin: 0 auto;
+#impress .reel {
+  width: min(1000px, 92vw);   
+  height: auto !important;   
+  aspect-ratio: 16 / 9;
 }
 
-.featured-grid .reel iframe {
+#impress .reel iframe {
   width: 100%;
-  aspect-ratio: 16 / 9;   
-  height: auto;
+  height: 100%;
   display: block;
   border: 0;
-  border-radius: inherit; 
-}
-.featured-grid .reel {
-  transform: translateZ(0);
+  border-radius: inherit;
 }
 
 /* SHORT REELS SECTION - CLEAN BACKGROUND */
