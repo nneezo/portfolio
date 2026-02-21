@@ -1741,3 +1741,49 @@ img {
 #work .carousel-btn {
   pointer-events: auto;
 }
+
+/* Carousel Dots */
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 167, 74, 0.5);
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.carousel-dots .dot:hover {
+  transform: scale(1.2);
+}
+
+.carousel-dots .dot.is-active {
+  background: rgba(212, 167, 74, 0.95);
+  border-color: rgba(212, 167, 74, 1);
+  transform: scale(1.35);
+}
+
+/* Slightly bigger on desktop */
+@media (min-width: 1024px) {
+  .carousel-dots .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Slightly smaller on small phones */
+@media (max-width: 420px) {
+  .carousel-dots .dot {
+    width: 6px;
+    height: 6px;
+  }
+}
