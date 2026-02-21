@@ -122,24 +122,39 @@ setTimeout(__startParticles, 1500);
         }
         
         resize() {
-            const dpr = window.devicePixelRatio || 1;
-            const rect = this.canvas.getBoundingClientRect();
-            
-            this.canvas.width = rect.width * dpr;
-            this.canvas.height = rect.height * dpr;
-            
-            this.ctx.scale(dpr, dpr);
-            
-            // Reposition particles proportionally
-            this.particles.forEach(p => {
-                const ratioX = p.originalX / (rect.width || 1);
-                const ratioY = p.originalY / (rect.height || 1);
-                
-                p.originalX = ratioX * rect.width;
-                p.originalY = ratioY * rect.height;
-                p.x = p.originalX;
-                p.y = p.originalY;
-            });
+          if (!this.canvas || !this.ctx) return;
+        
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        
+          // Use viewport size (more stable on mobile than getBoundingClientRect in early load)
+          const cssW = document.documentElement.clientWidth;
+          const cssH = document.documentElement.clientHeight;
+        
+          // Set actual pixel size
+          this.canvas.width = Math.floor(cssW * dpr);
+          this.canvas.height = Math.floor(cssH * dpr);
+        
+          // Keep CSS size
+          this.canvas.style.width = cssW + "px";
+          this.canvas.style.height = cssH + "px";
+        
+          // IMPORTANT: reset transform so scale does NOT stack
+          this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+          this.ctx.scale(dpr, dpr);
+        
+          // Reposition particles proportionally (keep your logic, just based on cssW/cssH)
+          const w = cssW || 1;
+          const h = cssH || 1;
+        
+          this.particles.forEach(p => {
+            const ratioX = p.originalX / w;
+            const ratioY = p.originalY / h;
+        
+            p.originalX = ratioX * w;
+            p.originalY = ratioY * h;
+            p.x = p.originalX;
+            p.y = p.originalY;
+          });
         }
         
         updateParticles() {
