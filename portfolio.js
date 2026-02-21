@@ -10,6 +10,56 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  const reelsGrid = document.querySelector('#work .reels-grid');
+  const dotsContainer = document.getElementById('reelsDots');
+  
+  if (reelsGrid && dotsContainer) {
+    const items = Array.from(reelsGrid.querySelectorAll('.reel'));
+  
+    // Auto create dots
+    dotsContainer.innerHTML = items
+      .map((_, i) => `<button class="dot ${i === 0 ? 'is-active' : ''}" data-index="${i}"></button>`)
+      .join('');
+  
+    const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
+  
+    const setActiveDot = (index) => {
+      dots.forEach(dot => dot.classList.remove('is-active'));
+      if (dots[index]) dots[index].classList.add('is-active');
+    };
+  
+    // Scroll to reel when clicking dot
+    dotsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.dot');
+      if (!btn) return;
+      const index = Number(btn.dataset.index);
+      const target = items[index];
+      reelsGrid.scrollTo({
+        left: target.offsetLeft - 8,
+        behavior: 'smooth'
+      });
+      setActiveDot(index);
+    });
+  
+    // Update active dot on scroll
+    reelsGrid.addEventListener('scroll', () => {
+      const center = reelsGrid.scrollLeft + reelsGrid.clientWidth / 2;
+      let closestIndex = 0;
+      let minDistance = Infinity;
+  
+      items.forEach((item, i) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(center - itemCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = i;
+        }
+      });
+  
+      setActiveDot(closestIndex);
+    }, { passive: true });
+  }  
+
   // TYPING EFFECT
   const words = ["HI! I'M DENZEN"];
   const typingSpeed = 90;
@@ -500,53 +550,3 @@ window.addEventListener(
   },
   { passive: true }
 );
-
-const reelsGrid = document.querySelector('#work .reels-grid');
-const dotsContainer = document.getElementById('reelsDots');
-
-if (reelsGrid && dotsContainer) {
-  const items = Array.from(reelsGrid.querySelectorAll('.reel'));
-
-  // Auto create dots
-  dotsContainer.innerHTML = items
-    .map((_, i) => `<button class="dot ${i === 0 ? 'is-active' : ''}" data-index="${i}"></button>`)
-    .join('');
-
-  const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
-
-  const setActiveDot = (index) => {
-    dots.forEach(dot => dot.classList.remove('is-active'));
-    if (dots[index]) dots[index].classList.add('is-active');
-  };
-
-  // Scroll to reel when clicking dot
-  dotsContainer.addEventListener('click', (e) => {
-    const btn = e.target.closest('.dot');
-    if (!btn) return;
-    const index = Number(btn.dataset.index);
-    const target = items[index];
-    reelsGrid.scrollTo({
-      left: target.offsetLeft - 8,
-      behavior: 'smooth'
-    });
-    setActiveDot(index);
-  });
-
-  // Update active dot on scroll
-  reelsGrid.addEventListener('scroll', () => {
-    const center = reelsGrid.scrollLeft + reelsGrid.clientWidth / 2;
-    let closestIndex = 0;
-    let minDistance = Infinity;
-
-    items.forEach((item, i) => {
-      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-      const distance = Math.abs(center - itemCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = i;
-      }
-    });
-
-    setActiveDot(closestIndex);
-  }, { passive: true });
-}
