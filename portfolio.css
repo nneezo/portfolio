@@ -755,9 +755,17 @@ body {
 
 /* Hide buttons on mobile (touch devices) */
 @media (max-width: 768px) {
-    .carousel-controls {
-        display: none;
-    }
+  .carousel-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .carousel-btn {
+    width: 48%;
+    padding: 0.9rem 1rem;
+    font-size: 0.7rem;
+  }
 }
 /* REAL ESTATE SECTION */
 
@@ -1692,4 +1700,44 @@ img {
     transform: translateY(-2px);
     border-color: rgba(212, 167, 74, 0.6);
     background: rgba(255, 255, 255, 0.10);
+}
+
+/* FORCE CAROUSEL ONLY INSIDE #work */
+#work .reels-grid {
+  display: flex !important;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+}
+
+#work .reels-grid .reel {
+  flex: 0 0 auto;
+  width: min(450px, 80vw);
+  scroll-snap-align: center;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* make sure iframe fills */
+#work .reels-grid .reel iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 20px;
+}
+/* Make carousel buttons always clickable */
+#work .carousel-controls {
+  position: relative;
+  z-index: 9999;
+}
+
+#work .carousel-btn {
+  pointer-events: auto;
 }
