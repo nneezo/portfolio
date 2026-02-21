@@ -608,6 +608,28 @@ body {
     margin-bottom: 2rem;
   }
 }
+
+.section-divider {
+  width: 70%;
+  height: 2px;
+  margin: 100px auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  position: relative;
+}
+
+.section-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(10px);
+  opacity: 0.9;
+}
 /* SHORT REELS SECTION - CLEAN BACKGROUND */
 
 .short-reels {
