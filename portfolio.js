@@ -1,9 +1,9 @@
 // portfolio.js
 
 document.addEventListener('DOMContentLoaded', function () {
-  // =========================
+
   // SEE MORE (To Impress -> Work)
-  // =========================
+
   const seeMoreBtn = document.getElementById('seeMoreBtn');
   if (seeMoreBtn) {
     seeMoreBtn.addEventListener('click', () => {
@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // =========================
+
   // TYPING EFFECT
-  // =========================
+
   const words = ["HI! I'M DENZEN"];
   const typingSpeed = 90;
   const deletingSpeed = 60;
@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (typingElement) typeLoop();
 
-  // =========================
+
   // MOBILE NAVIGATION + BLUR OVERLAY (safe if overlay not present)
-  // =========================
+
   const hamburger = document.querySelector('.hamburger');
   const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
   const navBlurOverlay = document.querySelector('.nav-blur-overlay');
@@ -112,9 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // =========================
+
   // SMOOTH SCROLL NAVIGATION
-  // =========================
+
   const navItems = document.querySelectorAll('.nav-item');
 
   navItems.forEach((item) => {
@@ -138,9 +138,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // =========================
+
   // PARALLAX (desktop only + reduced motion respected)
-  // =========================
+
   const hero = document.querySelector('.hero');
   const prefersReducedMotion =
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -170,9 +170,9 @@ document.addEventListener('DOMContentLoaded', function () {
     { passive: true }
   );
 
-  // =========================
+
   // INTERSECTION OBSERVER FOR FADE-IN SECTIONS
-  // =========================
+
   const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
 
   const sectionObserver = new IntersectionObserver(function (entries, obs) {
@@ -186,9 +186,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelectorAll('.fade-in-section').forEach((section) => sectionObserver.observe(section));
 
-  // =========================
+
   // CARD ANIMATIONS ON SCROLL
-  // =========================
+
   const cardObserver = new IntersectionObserver(function (entries, obs) {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
@@ -204,9 +204,9 @@ document.addEventListener('DOMContentLoaded', function () {
     .querySelectorAll('.card-hover, .design-card, .reel, .estate-video')
     .forEach((card) => cardObserver.observe(card));
 
-  // =========================
+
   // CONTACT ITEMS ANIMATE IN
-  // =========================
+
   const contactItems = document.querySelectorAll('.contact-item');
   contactItems.forEach((item, index) => {
     item.style.opacity = '0';
@@ -219,9 +219,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }, index * 100);
   });
 
-  // =========================
+
   // VIDEO HOVER EFFECTS (desktop)
-  // =========================
+
   const videoElements = document.querySelectorAll('.reel, .estate-video');
   videoElements.forEach((el) => {
     el.addEventListener('mouseenter', function () {
@@ -232,18 +232,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // =========================
+
   // PAGE LOAD FADE IN (safe)
-  // =========================
+
   document.body.style.opacity = '0';
   setTimeout(() => {
     document.body.style.transition = 'opacity 0.5s ease';
     document.body.style.opacity = '1';
   }, 80);
 
-  // =========================
+
   // RESPONSIVE NAV RESET
-  // =========================
+
   function handleResize() {
     const width = window.innerWidth;
     if (width > 1024 && hamburger && mobileNavOverlay) {
@@ -261,9 +261,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   handleResize();
 
-  // =========================
+
   // SOFTWARE ITEM ANIMATIONS
-  // =========================
+
   const softwareItems = document.querySelectorAll('.software-item');
   const softwareObserver = new IntersectionObserver(function (entries, obs) {
     entries.forEach((entry, index) => {
@@ -282,9 +282,9 @@ document.addEventListener('DOMContentLoaded', function () {
     softwareObserver.observe(item);
   });
 
-  // =========================
+
   // IFRAME FADE IN ON LOAD (only if it actually loads)
-  // =========================
+
   document.querySelectorAll('iframe').forEach((iframe) => {
     iframe.style.opacity = '0';
     iframe.addEventListener('load', function () {
@@ -293,9 +293,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // =========================
+
   // LAZY LOAD VIMEO IFRAMES (data-src -> src)
-  // =========================
+
   (function lazyLoadVimeo() {
     const vimeoIframes = Array.from(document.querySelectorAll('iframe.lazy-vimeo[data-src]'));
     if (!vimeoIframes.length) return;
@@ -330,9 +330,9 @@ document.addEventListener('DOMContentLoaded', function () {
     vimeoIframes.forEach((iframe) => io.observe(iframe));
   })();
 
-  // =========================
+
   // ACTIVE SECTION HIGHLIGHTING (safe)
-  // =========================
+
   const sections = document.querySelectorAll('section[id]');
   function highlightNavigation() {
     const scrollY = window.pageYOffset;
@@ -365,121 +365,36 @@ document.addEventListener('DOMContentLoaded', function () {
     { passive: true }
   );
 
-  // =========================
-  // DRAG SCROLL (reels-grid etc.) + TOUCH SUPPORT
-  // =========================
-  function enableDragScroll(container) {
-    if (!container) return;
+const reelsGrid = document.querySelector('#work .reels-grid');
+const estateGrid = document.querySelector('.estate-grid');
+const designsGrid = document.querySelector('.designs-grid');
 
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    let hasDragged = false;
+if (reelsGrid) enableDragScroll(reelsGrid);
+if (estateGrid) enableDragScroll(estateGrid);
+if (designsGrid) enableDragScroll(designsGrid);
 
-    container.style.cursor = 'grab';
+const scrollLeftBtn = document.getElementById('reelsScrollLeft');
+const scrollRightBtn = document.getElementById('reelsScrollRight');
 
-    container.addEventListener('mousedown', (e) => {
-      isDown = true;
-      hasDragged = false;
-      container.style.cursor = 'grabbing';
-      container.style.userSelect = 'none';
-      startX = e.pageX - container.offsetLeft;
-      scrollLeft = container.scrollLeft;
-    });
+if (scrollLeftBtn && reelsGrid) {
+  scrollLeftBtn.addEventListener('click', function () {
+    const scrollAmount = reelsGrid.clientWidth * 0.8;
+    reelsGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+}
 
-    const endDrag = () => {
-      isDown = false;
-      container.style.cursor = 'grab';
-      container.style.userSelect = '';
-      container.querySelectorAll('iframe').forEach((f) => (f.style.pointerEvents = 'auto'));
-    };
-
-    container.addEventListener('mouseup', endDrag);
-    container.addEventListener('mouseleave', endDrag);
-
-    container.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      hasDragged = true;
-      container.querySelectorAll('iframe').forEach((f) => (f.style.pointerEvents = 'none'));
-      const x = e.pageX - container.offsetLeft;
-      const walk = (x - startX) * 2;
-      container.scrollLeft = scrollLeft - walk;
-    });
-
-    container.addEventListener(
-      'click',
-      (e) => {
-        if (hasDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-          hasDragged = false;
-        }
-      },
-      true
-    );
-
-    // Touch swipe
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-
-    container.addEventListener(
-      'touchstart',
-      (e) => {
-        touchStartX = e.touches[0].pageX;
-        touchScrollLeft = container.scrollLeft;
-      },
-      { passive: true }
-    );
-
-    container.addEventListener(
-      'touchmove',
-      (e) => {
-        const touchX = e.touches[0].pageX;
-        const walk = (touchStartX - touchX) * 1.5;
-        container.scrollLeft = touchScrollLeft + walk;
-      },
-      { passive: true }
-    );
-  }
-
-  const reelsGrid = document.querySelector('.reels-grid');
-  const estateGrid = document.querySelector('.estate-grid');
-  const designsGrid = document.querySelector('.designs-grid');
-
-  if (reelsGrid) enableDragScroll(reelsGrid);
-  if (estateGrid) enableDragScroll(estateGrid);
-  if (designsGrid) enableDragScroll(designsGrid);
-
-  // Carousel button controls
-  const scrollLeftBtn = document.getElementById('reelsScrollLeft');
-  const scrollRightBtn = document.getElementById('reelsScrollRight');
-
-  if (scrollLeftBtn && reelsGrid) {
-    scrollLeftBtn.addEventListener('click', function () {
-      const scrollAmount = reelsGrid.offsetWidth * 0.1;
-      reelsGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-  }
-
-  if (scrollRightBtn && reelsGrid) {
-    scrollRightBtn.addEventListener('click', function () {
-      const scrollAmount = reelsGrid.offsetWidth * 0.1;
-      reelsGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
-  }
-});
-
-// =========================
+if (scrollRightBtn && reelsGrid) {
+  scrollRightBtn.addEventListener('click', function () {
+    const scrollAmount = reelsGrid.clientWidth * 0.8;
+    reelsGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+}
 // PREVENT IMAGE DRAG
-// =========================
 document.addEventListener('dragstart', function (e) {
   if (e.target && e.target.tagName === 'IMG') e.preventDefault();
 });
 
-// =========================
 // SMOOTH SCROLL POLYFILL (only if needed)
-// =========================
 if (!('scrollBehavior' in document.documentElement.style)) {
   const links = document.querySelectorAll('.nav-item');
 
@@ -517,9 +432,7 @@ if (!('scrollBehavior' in document.documentElement.style)) {
   });
 }
 
-// =========================
 // BACKDROP FILTER SUPPORT CHECK
-// =========================
 function checkBackdropFilterSupport() {
   const testElement = document.createElement('div');
   testElement.style.backdropFilter = 'blur(10px)';
@@ -529,9 +442,7 @@ function checkBackdropFilterSupport() {
 }
 checkBackdropFilterSupport();
 
-// =========================
 // BACK TO TOP BUTTON
-// =========================
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
   window.addEventListener(
@@ -548,9 +459,7 @@ if (backToTopBtn) {
   });
 }
 
-// =========================
 // NAV COLOR UPDATE (safe, optional)
-// =========================
 function updateNavigationColors() {
   const quoteText = document.querySelector('.quote-text');
   const topNav = document.querySelector('.top-nav');
