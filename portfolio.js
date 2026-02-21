@@ -1,27 +1,36 @@
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     
-    // TYPING EFFECT
+    const seeMoreBtn = document.getElementById('seeMoreBtn');
+    if (seeMoreBtn) {
+      seeMoreBtn.addEventListener('click', () => {
+        const workSection = document.getElementById('work');
+        if (workSection) {
+          workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+    /// TYPING EFFECT
     
     const words = ["HI! I'M DENZEN"];
     const typingSpeed = 90;
     const deletingSpeed = 60;
     const pauseAfterTyping = 1400;
     const pauseAfterDeleting = 600;
-
+    
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-
+    
     const typingElement = document.querySelector(".typing-text");
-
+    
     function typeLoop() {
         const currentWord = words[wordIndex];
-
+    
         if (!isDeleting) {
             typingElement.textContent = currentWord.slice(0, charIndex + 1);
             charIndex++;
-
+    
             if (charIndex === currentWord.length) {
                 return setTimeout(() => {
                     isDeleting = true;
@@ -31,23 +40,25 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             typingElement.textContent = currentWord.slice(0, charIndex - 1);
             charIndex--;
-
+    
             if (charIndex === 0) {
                 isDeleting = false;
                 wordIndex = (wordIndex + 1) % words.length;
-
+    
                 return setTimeout(() => {
                     typeLoop();
                 }, pauseAfterDeleting);
             }
         }
-
+    
         const delay = isDeleting ? deletingSpeed : typingSpeed;
         setTimeout(typeLoop, delay);
     }
-
-    typeLoop();
     
+    if (typingElement) {
+        typeLoop();
+    }
+        
     // PREMIUM MOBILE NAVIGATION WITH BLUR OVERLAY
     
     const hamburger = document.querySelector('.hamburger');
@@ -674,14 +685,6 @@ window.addEventListener('scroll', () => {
     })();
 
 });
-
-const seeMoreBtn = document.getElementById('seeMoreBtn');
-if (seeMoreBtn) {
-  seeMoreBtn.addEventListener('click', () => {
-    const work = document.getElementById('work');
-    if (work) work.scrollIntoView({ behavior: 'smooth' });
-  });
-}
 
 window.addEventListener('load', updateNavigationColors);
 window.addEventListener('resize', updateNavigationColors);
