@@ -1702,7 +1702,13 @@ img {
     background: rgba(255, 255, 255, 0.10);
 }
 
-/* FORCE CAROUSEL ONLY INSIDE */
+/* ==============================
+   FORCE CAROUSEL ONLY INSIDE #work
+   FINAL (fixed: no duplicates, works all res,
+   layout =  ● ● ●   with  ‹        ›  centered)
+   ============================== */
+
+/* Reels strip */
 #work .reels-grid {
   display: flex !important;
   overflow-x: auto;
@@ -1714,6 +1720,11 @@ img {
   -webkit-overflow-scrolling: touch;
 }
 
+#work .reels-grid:active {
+  cursor: grabbing;
+}
+
+/* Each reel */
 #work .reels-grid .reel {
   flex: 0 0 auto;
   width: min(450px, 80vw);
@@ -1723,103 +1734,60 @@ img {
   overflow: hidden;
 }
 
-/* make sure iframe fills */
+/* Make sure iframe fills */
 #work .reels-grid .reel iframe {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 20px;
+  border-radius: inherit;
 }
-/* Make carousel buttons always clickable */
-#work .carousel-controls {
+
+/* CONTROLS WRAPPER */
+#work .carousel-wrapper {
   position: relative;
-  z-index: 9999;
+  width: 100%;
+  max-width: 900px;
+  margin: 18px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /
 }
 
-#work .carousel-btn {
-  pointer-events: auto;
+#work .carousel-wrapper * {
+  pointer-events: auto; 
 }
 
-/* Carousel Dots */
-.carousel-dots {
+#work .carousel-dots {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-top: 18px;
 }
 
-.carousel-dots .dot {
+#work .carousel-dots .dot {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  border: 1px solid rgba(212, 167, 74, 0.5);
+  border: 1px solid rgba(212, 167, 74, 0.6);
   background: rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
-.carousel-dots .dot:hover {
+#work .carousel-dots .dot:hover {
   transform: scale(1.2);
 }
 
-.carousel-dots .dot.is-active {
+#work .carousel-dots .dot.is-active {
   background: rgba(212, 167, 74, 0.95);
   border-color: rgba(212, 167, 74, 1);
   transform: scale(1.35);
 }
 
-/* Slightly bigger on desktop */
-@media (min-width: 1024px) {
-  .carousel-dots .dot {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-/* Slightly smaller on small phones */
-@media (max-width: 420px) {
-  .carousel-dots .dot {
-    width: 6px;
-    height: 6px;
-  }
-}
-/* Premium Carousel Layou */
-
-.carousel-wrapper {
-  position: relative;
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Dots centered */
-.carousel-dots {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel-dots .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  border: 1px solid rgba(212,167,74,0.6);
-  transition: all 0.25s ease;
-}
-
-.carousel-dots .dot.is-active {
-  background: rgba(212,167,74,0.95);
-  transform: scale(1.4);
-}
-
-/* Arrows */
-.carousel-arrow {
+#work .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1828,44 +1796,64 @@ img {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 1.6rem;
-  background: rgba(255,255,255,0.25);
+  font-size: 1.4rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(212,167,74,0.4);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 167, 74, 0.4);
   color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  z-index: 10;
 }
 
-.carousel-arrow:hover {
-  background: rgba(255,255,255,0.5);
-  transform: translateY(-50%) scale(1.1);
+#work .carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.08);
+  border-color: rgba(212, 167, 74, 0.7);
 }
 
-/* Position left and right */
-.carousel-arrow.left {
-  left: -60px;
+#work .carousel-arrow.left {
+  left: 0;
 }
 
-.carousel-arrow.right {
-  right: -60px;
+#work .carousel-arrow.right {
+  right: 0;
 }
 
-/* Adjust for smaller screens */
+@media (min-width: 1024px) {
+  #work .carousel-dots .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
 @media (max-width: 768px) {
-  .carousel-arrow.left {
-    left: -30px;
+  #work .carousel-wrapper {
+    max-width: 100%;
+    padding: 0 8px; 
   }
 
-  .carousel-arrow.right {
-    right: -30px;
+  #work .carousel-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Tiny phones: smaller dots */
+@media (max-width: 420px) {
+  #work .carousel-dots .dot {
+    width: 6px;
+    height: 6px;
   }
 
-  .carousel-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 1.4rem;
+  #work .carousel-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 1.15rem;
   }
 }
