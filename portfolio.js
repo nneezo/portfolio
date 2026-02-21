@@ -302,24 +302,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // LAZY LOADING FOR IMAGES
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src || img.src;
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
         
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            imageObserver.observe(img);
+    document.addEventListener("DOMContentLoaded", function () {
+      const iframes = document.querySelectorAll("iframe[data-src]");
+    
+      function loadIframe(iframe) {
+        if (!iframe.src) {
+          iframe.src = iframe.dataset.src;
+        }
+      }
+    
+      // If IntersectionObserver exists
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              loadIframe(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
         });
-    }
+    
+        iframes.forEach(iframe => observer.observe(iframe));
+      } else {
+        // Fallback for mobile browsers
+        iframes.forEach(loadIframe);
+      }
+    });
     
     // ACTIVE SECTION HIGHLIGHTING
     
