@@ -610,7 +610,7 @@ body {
 }
 
 .section-divider {
-  width: 70%;
+  width: 100%;
   height: 2px;
   margin: 100px auto;
   background: linear-gradient(
