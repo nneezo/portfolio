@@ -561,6 +561,13 @@ body {
   gap: 0;
   padding: 20px 0;
 }
+.featured-grid h2 {
+ font-size: 3rem;
+ font-weight: 900;
+ margin-bottom: 3rem;
+ color: white;
+ text-align: center;
+}
 
 .featured-grid .reel {
   width: min(920px, 92vw);
