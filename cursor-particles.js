@@ -198,9 +198,10 @@ setTimeout(__startParticles, 1500);
         }
         
         drawParticles() {
-            const rect = this.canvas.getBoundingClientRect();
-            
-            this.ctx.clearRect(0, 0, rect.width, rect.height);
+                const w = document.documentElement.clientWidth;
+                const h = document.documentElement.clientHeight;
+                
+                this.ctx.clearRect(0, 0, w, h);
             
             // Draw connecting lines first (behind particles)
             if (this.config.enableLines) {
