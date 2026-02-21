@@ -599,14 +599,20 @@ body {
 }
 
 @media (max-width: 768px) {
-  #impress .reel {
-    width: 95vw;
-  }
+    .carousel-controls {
+        display: flex;
+    }
+}
 
-  #impress h2 {
+#impress h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
   }
+}
+
+#work .carousel-controls {
+  position: relative;
+  z-index: 999;
 }
 
 .section-divider {
