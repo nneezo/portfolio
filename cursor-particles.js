@@ -155,7 +155,17 @@ setTimeout(__startParticles, 1500);
             p.x = p.originalX;
             p.y = p.originalY;
           });
-        }
+        } 
+        
+        // Mobile rotation + returning to tab can cause "blank until switch apps" issue
+        window.addEventListener('orientationchange', () => {
+        setTimeout(() => this.resize(), 250);
+        }, { passive: true });
+        
+        // When coming back to the tab/app, force resize + redraw
+        window.addEventListener('pageshow', () => {
+        setTimeout(() => this.resize(), 150);
+        }, { passive: true });
         
         updateParticles() {
             this.particles.forEach(particle => {
