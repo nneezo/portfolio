@@ -1,10 +1,3 @@
-/**
- * Background Network Particles
- * - particles scattered behind page
- * - connects to cursor via lines
- * - canvas fixed, pointer-events none (won't affect clicks)
- * - optimized for performance
- */
 (function () {
   "use strict";
 
