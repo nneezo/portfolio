@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://player.vimeo.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
 </head>
  
 <body>
@@ -45,7 +46,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="profile-photo glass-card ">
-                    <img src="download" alt="Denzen Profile">
+                    <img src="profile.webp" alt="Denzen Profile" width="200" height="280" fetchpriority="high">
                 </div>
                 <div class="hero-text">
                     <h1><span class="typing-text"></span></h1>
